@@ -1,5 +1,4 @@
 import Vapor
-import Leaf
 import FluentSQLite
 
 /// Called before your application initializes.
@@ -13,10 +12,6 @@ public func configure(
     let router = EngineRouter.default()
     try routes(router)
     services.register(router, as: Router.self)
-
-    let leafProvider = LeafProvider()
-    try services.register(leafProvider)
-    config.prefer(LeafRenderer.self, for: ViewRenderer.self)
 
     try services.register(FluentSQLiteProvider())
 
