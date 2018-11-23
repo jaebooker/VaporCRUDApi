@@ -12,11 +12,15 @@ final class UserController {
     }
 
     // create a new user
-    func create(_ req: Request) throws -> Future<Response> {
-        return try req.content.decode(User.self).flatMap { user in
-            return user.save(on: req).map { _ in
-                return req.redirect(to: "users")
-            }
+    func create(_ req: Request) throws -> Future<User> {
+        return try req.content.decode(User.self).flatMap {
+            user in
+            return user.save(on: req)
         }
+//        return try req.content.decode(User.self).flatMap { user in
+//            return user.save(on: req).map { _ in
+//                return req.redirect(to: "users")
+//            }
+//        }
     }
 }
